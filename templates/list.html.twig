@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Posts in database!{% endblock %}
+
+{% block body %}
+
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+            <a href="{{ path('remove') }}"><button class="btn btn-lg btn-primary" type="submit">
+                Remove all posts
+            </button></a>
+            <a href="{{ path('create') }}"><button class="btn btn-lg btn-primary" type="submit">
+                    Create new posts
+                </button></a>
+        {% endif %}
+
+        <ul>
+            {% for post in posts %}
+                <li><strong>Author: </strong> {{ post.user.email }}</li>
+                <li><strong>Title: </strong> {{ post.title }}</li>
+                <li><strong>Body: </strong>{{ post.body}}</li>
+                <br>
+            {% endfor %}
+        </ul>
+
+        {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+        #}
+
+{% endblock %}
